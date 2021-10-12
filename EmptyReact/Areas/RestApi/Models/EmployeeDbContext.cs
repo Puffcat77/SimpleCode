@@ -11,7 +11,6 @@ namespace EmptyReact.Areas.RestApi.Models
         public DbSet<Employee> Employees { get; set; }
         public EmployeeDbContext(DbContextOptions<EmployeeDbContext> options): base(options)
         {
-            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
     }

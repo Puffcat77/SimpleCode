@@ -15,18 +15,6 @@ namespace EmptyReact.Areas.RestApi.Controllers
 
         public EmployeeController(EmployeeDbContext context)
         {
-            if (context.Employees.Count() == 0)
-                for (int i = 0; i < 15; i++)
-                    context.Employees.Add(new Employee()
-                    {
-                        Name = "Name " + (i + 1),
-                        Email = "Email" + (i + 1),
-                        Birthday = new DateTime(2000, 10, i + 1),
-                        Salary = 50000 - i * 500,
-                        LastModifiedDate = DateTime.Now.Date
-                    });
-            context.SaveChanges();
-            this.context = context;
         }
 
         [HttpGet("{id}")]
@@ -38,13 +26,6 @@ namespace EmptyReact.Areas.RestApi.Controllers
             if (employee == null)
                 return new JsonResult("Not found");
             return new JsonResult(employee);
-        
-        
-        
-        
-        
-        
-        
         }
 
         [HttpPost]
