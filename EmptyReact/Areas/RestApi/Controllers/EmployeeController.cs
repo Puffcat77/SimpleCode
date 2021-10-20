@@ -15,29 +15,42 @@ namespace EmptyReact.Areas.RestApi.Controllers
 
         public EmployeeController(EmployeeDbContext context)
         {
+            this.context = context;
         }
 
         [HttpGet("{id}")]
-        public async Task<JsonResult> Get(int? id)
+        public async Task<JsonResult> Get(int id)
         {
-            if (id == null)
-                return new JsonResult(context.Employees.ToList());
             var employee = await context.Employees.FirstOrDefaultAsync(e => e.Id == id);
             if (employee == null)
                 return new JsonResult("Not found");
             return new JsonResult(employee);
         }
 
+        [HttpGet]
+        public JsonResult GetAll()
+        {
+            return new JsonResult(context.Employees.ToList());
+        }
+
         [HttpPost]
-        public async Task<JsonResult> Add([FromBody] Employee emp)
+        public async Task<IActionResult> Add([FromBody] Employee emp)
         {
             if (!ModelState.IsValid)
-                return new JsonResult("Employee data is not valid");
-            if (emp.Id == default)
-                emp.Id = context.Employees.Count() + 1;
+            {
+                var allErrors = ModelState.Values.SelectMany(v => v.Errors);
+                foreach (var error in allErrors)
+                {
+                    Console.WriteLine(error.ErrorMessage);
+                    Console.WriteLine(error.Exception);
+                }
+                return new StatusCodeResult(400);
+            }
+            
+            emp.LastModifiedDate = DateTime.Now;
             context.Employees.Add(emp);
             await context.SaveChangesAsync();
-            return new JsonResult("Added successfully!");
+            return new StatusCodeResult(200);
         }
 
         [HttpDelete("{id}")]

@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router';
 import {Table} from 'react-bootstrap';
-import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+// import { format, formatDistance, formatRelative, subDays } from 'date-fns'
+import { MyButton } from './UI/button/MyButton.jsx';
+import { AppConfig } from './AppConfig.js';
+import { FetchComponent } from './FetchComponent.js';
+import { AddEmployee } from "./AddEmployee.js";
 
 
 export class Employees extends Component {
@@ -9,32 +14,33 @@ export class Employees extends Component {
   constructor(props) {
     super(props);
     this.state={emps:[]}
-    this.userLang = navigator.language || navigator.userLanguage;
-    this.offset = new Date().getTimezoneOffset();
   }
 
-    refreshList() {
-        fetch(process.env.REACT_APP_EMPLOYEE_API)
-        .then(resp => resp.json())
-        .then(data => {
-          this.setState({emps: data})
-        });
+  async refreshList() {
+    fetch(process.env.REACT_APP_EMPLOYEE_API)
+      .then(response => response.json())
+      .then(data => this.setState({emps: data}));
   }
 
-    componentDidMount() {
-        this.refreshList();
-      }
-  
-    componentDidUpdate() {
-        //this.refreshList();
-    }
+  componentDidMount() {
+      this.refreshList();
+  }
+
+  componentDidUpdate() {
+      //this.refreshList();
+  }
 
   render () {
     const {emps} = this.state;
     return ( 
       <div>
-        <h3>Employees page</h3>
-        <input type="button" value="Add"/>
+        <h3 className="employees-table">
+          Employees page
+          <MyButton type="button" value="Add employee">
+          { <Route exact path='/add' component={AddEmployee}/> }
+          </MyButton>
+        </h3>
+        
         <Table className="mt-4" striped bordered hover size="sm">
           <thead>
             <tr>
@@ -46,18 +52,14 @@ export class Employees extends Component {
             </tr>
           </thead>
           <tbody>
-           {emps.map(emp => {
+          {emps.map(emp => {
               return <tr key={emp.id}>
                 <td>{emp.id}</td>
                 <td>{emp.name}</td>
                 <td>{emp.email}</td>
-                <td>{ new Date(emp.birthday).toLocaleString(this.userLang, {
-                      year: 'numeric',
-                      month: 'long',
-                      day: 'numeric',
-                    })}
+                <td>{ new Date(emp.birthday).toLocaleDateString() }
                 </td>
-                <td>{Intl.NumberFormat(this.userLang, { minimumFractionDigits: 2 }).format(emp.salary)}</td>
+                <td>{ Intl.NumberFormat(AppConfig.userLanguage, { minimumFractionDigits: 2 }).format(emp.salary)}</td>
                 <td>Edit Delete</td>
               </tr>
               }
