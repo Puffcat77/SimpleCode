@@ -5,7 +5,7 @@ import { MyInput } from "./UI/input/MyInput";
 import { FetchComponent } from "./FetchComponent";
 import { Form } from "react-bootstrap";
 
-export const AddEmployee = ({addEmployee, ...props}) =>  {    
+export const AddEmployee = ({props}) =>  {    
     const [name, setName] = useState('asd');
     const [email, setEmail] = useState('asd@asd.asd');
     const [birthday, setBirthday] = useState(new Date());

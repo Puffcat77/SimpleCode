@@ -6,6 +6,8 @@ import { MyButton } from './UI/button/MyButton.jsx';
 import { AppConfig } from './AppConfig.js';
 import { FetchComponent } from './FetchComponent.js';
 import { AddEmployee } from "./AddEmployee.js";
+import { Link } from 'react-router-dom';
+import classes from './UI/link/link.module.css';
 
 
 export class Employees extends Component {
@@ -36,9 +38,9 @@ export class Employees extends Component {
       <div>
         <h3 className="employees-table">
           Employees page
-          <MyButton type="button" value="Add employee">
-          { <Route exact path='/add' component={AddEmployee}/> }
-          </MyButton>
+          <Link to="/add" className={ classes.link }>
+            Add employee
+          </Link>
         </h3>
         
         <Table className="mt-4" striped bordered hover size="sm">

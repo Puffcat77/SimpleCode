@@ -1,0 +1,11 @@
+.link {
+    border: teal 1px solid;
+    padding: 5px;
+    color: teal;
+    font-size: 18px;
+}
+
+.link:hover {
+    color: teal;
+    text-decoration: none;
+}
