@@ -4,7 +4,7 @@ import { Form } from "react-bootstrap";
 import { EmployeeForm } from './EmployeeForm';
 import { useEmployeeStatus } from './hooks/useEmployeeStatus';
 import { EmployeeContext } from "./hooks/EmployeeContext";
-import classes from './UI/buttonGroups/ButtonGroups.module.css';
+import classes from './UI/button/MyButton.module.css';
 
 export const AddEmployee = ({props}) =>  {
     const [employee, setEmployee] = useState({});
@@ -37,7 +37,7 @@ export const AddEmployee = ({props}) =>  {
             <Form>
                     <EmployeeForm id={0}/>
                     <MyButton 
-                        customClasses = { classes.buttons }
+                        customClasses = { classes.group }
                         disabled={!isFilled} 
                         value="Add new employee" 
                         onClick={e => handleSubmit(e)}/>

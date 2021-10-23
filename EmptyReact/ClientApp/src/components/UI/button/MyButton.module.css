@@ -9,12 +9,42 @@
     display: inline-block;
 }
 
+.small {
+    padding: 2px 3px;
+    font-weight: normal;
+    height: 30px;
+}
+
 .myBtn:disabled {
     background-color: rgba(150, 150, 150, 0.5);
     border: 1px solid rgba(150, 150, 150, 0.5);
-    cursor:not-allowed;
+    cursor: not-allowed;
 }
 
 .rounded {
-    border-radius: 15%;
+    border-radius: 5px;
+}
+
+.group {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.inline-group {
+    margin-top: 0px;
+    justify-self: center;
+}
+
+.red {
+    color: white;
+    border: red;
+    background: red;
+}
+
+.splitter {
+    height: auto;
+    width: 1px;
+    margin: 0px 2px;
+    display: inline-block;
 }

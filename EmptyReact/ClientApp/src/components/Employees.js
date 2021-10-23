@@ -1,49 +1,55 @@
-import React, { Component } from 'react';
-import { Route } from 'react-router';
+import React, { useState, useEffect } from 'react';
 import {Table} from 'react-bootstrap';
-// import { format, formatDistance, formatRelative, subDays } from 'date-fns'
 import { MyButton } from './UI/button/MyButton.jsx';
 import { AppConfig } from './AppConfig.js';
-import { FetchComponent } from './FetchComponent.js';
-import { AddEmployee } from "./AddEmployee.js";
-import { Link } from 'react-router-dom';
-import classes from './UI/link/link.module.css';
+import classes from './UI/button/MyButton.module.css';
 
 
-export class Employees extends Component {
-  static displayName = Employees.name;
-
-  constructor(props) {
-    super(props);
-    this.state={emps:[]}
+export const Employees = (props) => {
+  const displayName = Employees.name;
+  const [isLoading, setIsLoading] = useState(false);
+  const [employees, setEmployees] = useState([]);
+  
+  function getEmployees() {
+    let emps = [];
+    fetch(process.env.REACT_APP_EMPLOYEE_API)
+      .then(response =>  response.json())
+      .then(data => {
+        setEmployees(data);
+      })
   }
 
-  async refreshList() {
+  function refreshList() {
+    setIsLoading(true);
     fetch(process.env.REACT_APP_EMPLOYEE_API)
       .then(response => response.json())
-      .then(data => this.setState({emps: data}));
+      .then(data => {
+        setIsLoading(false);
+        setEmployees(data);
+      });
   }
 
-  componentDidMount() {
-      this.refreshList();
+  function deleteEmployee(employeeId) {
+    fetch(process.env.REACT_APP_EMPLOYEE_API+`/${employeeId}`, {
+        method: 'DELETE'
+      })
+    .then(response => response)
+    .then(data => refreshList())
+    .catch(error => console.log(error));
   }
 
-  componentDidUpdate() {
-      //this.refreshList();
-  }
-
-  render () {
-    const {emps} = this.state;
-    return ( 
-      <div>
-        <h3 className="employees-table">
-          Employees page
-          <Link to="/add" className={ classes.link }>
-            Add employee
-          </Link>
-        </h3>
-        
-        <Table className="mt-4" striped bordered hover size="sm">
+  useEffect(() => refreshList(), []);
+  
+  return ( 
+    <div>
+      <h3 className="employees-table">
+        Employees page
+        <MyButton disabled={isLoading} value="Add employee" onClick={e => { window.location.href='/add' }}/>
+      </h3>
+      {
+        isLoading?
+        <h4>Loading...</h4>
+        :<Table className="mt-4" striped bordered hover size="sm">
           <thead>
             <tr>
               <th>Id</th>
@@ -54,7 +60,7 @@ export class Employees extends Component {
             </tr>
           </thead>
           <tbody>
-          {emps.map(emp => {
+          {employees?.map(emp => {
               return <tr key={emp.id}>
                 <td>{emp.id}</td>
                 <td>{emp.name}</td>
@@ -63,14 +69,23 @@ export class Employees extends Component {
                 </td>
                 <td>{ Intl.NumberFormat(AppConfig.userLanguage, { minimumFractionDigits: 2 }).format(emp.salary)}</td>
                 <td>
-                  <Link to={"/employee/" + emp.id} className={ [classes.link, classes.smallLink].join(' ') }>Edit</Link>
-                   Delete</td>
+                  <div className={ classes.inlineGroup }>
+                    <MyButton 
+                      onClick ={ e => window.location.href = ("/employee/" + emp.id)} 
+                      customClasses={ classes.small } value='Edit'/>
+                    <div className={classes.splitter}/>
+                    <MyButton 
+                      onClick ={ e => deleteEmployee(emp.id)} 
+                      customClasses={ [classes.small, classes.red, classes.delete].join(' ') } 
+                      value='Delete'/>
+                  </div>
+                </td>
               </tr>
               }
             )}
           </tbody>
         </Table>
-      </div>
-    );
-  }
+      }
+    </div>
+  );
 }

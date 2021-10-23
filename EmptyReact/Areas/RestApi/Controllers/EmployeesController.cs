@@ -54,24 +54,24 @@ namespace EmptyReact.Areas.RestApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        public async Task<JsonResult> Remove(int id)
+        public IActionResult Remove(int id)
         {
-            var emp = await context.Employees.FirstOrDefaultAsync(e => e.Id == id);
+            var emp = context.Employees.FirstOrDefault(e => e.Id == id);
             if (emp == null)
-                return new JsonResult("There is no employee with such id");
+                return new StatusCodeResult(400);
             context.Employees.Remove(emp);
-            await context.SaveChangesAsync();
-            return new JsonResult("Deleted successfully");
+            context.SaveChanges();
+            return new StatusCodeResult(200);
         }
 
         [HttpPut]
-        public async Task<JsonResult> Edit([FromBody] Employee emp)
+        public async Task<IActionResult> Edit([FromBody] Employee emp)
         {
             if (!ModelState.IsValid)
-                return new JsonResult(emp);
+                return new StatusCodeResult(400);
             context.Employees.Update(emp);
             await context.SaveChangesAsync();
-            return new JsonResult("Edited successfully");
+            return new StatusCodeResult(200);
         }
     }
 }

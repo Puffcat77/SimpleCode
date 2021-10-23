@@ -6,8 +6,8 @@ export const MyButton = (props) => {
     return (
         <button 
             className={ [classes.myBtn, classes.rounded, props.customClasses].join(' ') } 
-            onClick={props.onClick}
-            disabled={props.disabled} >
+            onClick = { props.onClick }
+            disabled = { props.disabled } >
             {props.value}
         </button>
     );
