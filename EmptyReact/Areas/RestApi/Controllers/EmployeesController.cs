@@ -9,11 +9,11 @@ using EmptyReact.Areas.RestApi.Models;
 namespace EmptyReact.Areas.RestApi.Controllers
 {
     [Route("api/[controller]")]
-    public class EmployeeController : Controller
+    public class EmployeesController : Controller
     {
         private readonly EmployeeDbContext context;
 
-        public EmployeeController(EmployeeDbContext context)
+        public EmployeesController(EmployeeDbContext context)
         {
             this.context = context;
         }

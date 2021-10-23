@@ -62,7 +62,9 @@ export class Employees extends Component {
                 <td>{ new Date(emp.birthday).toLocaleDateString() }
                 </td>
                 <td>{ Intl.NumberFormat(AppConfig.userLanguage, { minimumFractionDigits: 2 }).format(emp.salary)}</td>
-                <td>Edit Delete</td>
+                <td>
+                  <Link to={"/employee/" + emp.id} className={ [classes.link, classes.smallLink].join(' ') }>Edit</Link>
+                   Delete</td>
               </tr>
               }
             )}

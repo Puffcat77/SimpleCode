@@ -1,11 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import classes from './MyInput.module.css';
 
 export const MyInput = ({type, validationRegex, setValue, ...props}) => {
-    const [isValid, setIsValid] = useState(false)
+    const [isValid, setIsValid] = useState(false);
 
-    const validateInput = e => {
-        let val = e.target.value;
+    useEffect(() => validateInput(props.value), [])
+
+    const validateInput = val => {
+        if (val === undefined)
+            return;
         if (!val.match(validationRegex)) {
             setIsValid(false);
         }
@@ -20,8 +23,9 @@ export const MyInput = ({type, validationRegex, setValue, ...props}) => {
             <input 
                 type = { type } 
                 className = { classes.myInput }
-                onChange = { e => validateInput(e) }
+                onChange = { e => validateInput(e.target.value) }
                 value = {props.value}
+                max = {props.max}
                 />
             <div className={ classes.validation } >
             {!isValid ?

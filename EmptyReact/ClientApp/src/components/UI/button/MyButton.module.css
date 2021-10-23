@@ -1,10 +1,20 @@
 .myBtn {
     padding: 5px 5px;
-    color: teal;
+    color: white;
+    background-color: teal;
     font-size: 16px;
     font-weight: bold;
-    background: transparent;
     border: 1px solid teal;
     cursor: pointer;
     display: inline-block;
+}
+
+.myBtn:disabled {
+    background-color: rgba(150, 150, 150, 0.5);
+    border: 1px solid rgba(150, 150, 150, 0.5);
+    cursor:not-allowed;
+}
+
+.rounded {
+    border-radius: 15%;
 }

@@ -1,0 +1,11 @@
+.buttons {
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.cancel {
+    color: white;
+    border: red;
+    background: red;
+}

@@ -7,7 +7,7 @@ export class AppConfig {
         month: "long",
         day: "numeric"
   };
-  static emailValidationRegex = "[^\\s]\\w+\\@\\w+\\.\\w+"
+  static emailValidationRegex = "[^\\s]\\w*\\@\\w+\\.\\w+"
   static salaryValidationRegex = "[\\d]+[\\.\\,]?\\d{0,2}"
   static nameValidationRegex = "[^\\d]+"
 }
