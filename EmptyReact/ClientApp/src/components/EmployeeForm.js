@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useMemo, useState } from "react";
 import { AppConfig } from "./AppConfig";
 import { EmployeeContext } from "./hooks/EmployeeContext";
 import { MyInput } from "./UI/input/MyInput";
+import { todayDate } from "../Utils/DateTimeParser";
 
 
 export const EmployeeForm = (props) => {
@@ -12,19 +13,7 @@ export const EmployeeForm = (props) => {
     const [salary, setSalary] = useState(employee.salary);
 
     const maxBirthday = () => {
-        let today = new Date();
-        let dd = today.getDate();
-        let mm = today.getMonth() + 1;
-        let yyyy = today.getFullYear();
-        if (dd < 10) {
-            dd = '0' + dd;
-        }
-
-        if (mm < 10) {
-            mm = '0' + mm;
-        }
-        
-        return [yyyy, mm, dd].join('-');
+        return todayDate();
     };
 
     const emp = useMemo(() => {
@@ -81,7 +70,7 @@ export const EmployeeForm = (props) => {
                             placeholder = {Date()}
                             setValue={ setBirthday } 
                             value={ birthday }
-                            max={maxBirthday()}
+                            max={ maxBirthday() }
                         />
                     </td>
                 </tr>

@@ -3,39 +3,21 @@ import {Table} from 'react-bootstrap';
 import { MyButton } from './UI/button/MyButton.jsx';
 import { AppConfig } from './AppConfig.js';
 import classes from './UI/button/MyButton.module.css';
+import { FetchComponent } from './DataFetcher.js';
 
 
 export const Employees = (props) => {
-  const displayName = Employees.name;
   const [isLoading, setIsLoading] = useState(false);
   const [employees, setEmployees] = useState([]);
-  
-  function getEmployees() {
-    let emps = [];
-    fetch(process.env.REACT_APP_EMPLOYEE_API)
-      .then(response =>  response.json())
-      .then(data => {
-        setEmployees(data);
-      })
-  }
 
   function refreshList() {
-    setIsLoading(true);
-    fetch(process.env.REACT_APP_EMPLOYEE_API)
-      .then(response => response.json())
-      .then(data => {
-        setIsLoading(false);
-        setEmployees(data);
-      });
+    FetchComponent.getEmployees(setEmployees, setIsLoading);
   }
 
+  useEffect(() => console.log(employees, isLoading));
+
   function deleteEmployee(employeeId) {
-    fetch(process.env.REACT_APP_EMPLOYEE_API+`/${employeeId}`, {
-        method: 'DELETE'
-      })
-    .then(response => response)
-    .then(data => refreshList())
-    .catch(error => console.log(error));
+    FetchComponent.removeEmployee(employeeId, refreshList);
   }
 
   useEffect(() => refreshList(), []);

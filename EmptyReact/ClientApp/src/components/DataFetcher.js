@@ -1,30 +1,29 @@
 import { formDateString } from '../Utils/DateTimeParser'
 
-export const FetchComponent = (props) => {
-    const getEmployees = (setEmployees, setIsLoading) => {
-        setIsLoading(false);
+export class FetchComponent {
+    static getEmployees (setEmployees, setIsLoading) {
+        setIsLoading(true);
         fetch(process.env.REACT_APP_EMPLOYEE_API)
         .then(response => response.json())
         .then(data => {
             setEmployees(data);
-            setIsLoading(true);
+            setIsLoading(false);
         });
     };
 
-    const addEmployee = (employee, setIsAdding) => {
-        setIsAdding(true);
+    static addEmployee(employee, successCallback) {
         fetch(process.env.REACT_APP_EMPLOYEE_API, {
             method: "POST",
             headers: {
                 'Accept':'application/json',
                 'Content-Type': 'application/json;charset=utf-8'
             },
-            body: employee
+            body: JSON.stringify(employee)
         })
         .then(resp =>  { 
             if (resp.ok) {
-                setIsAdding(false);
                 alert("Employee added successfully!");
+                successCallback();
             }
         })
         .catch( error =>
@@ -32,7 +31,7 @@ export const FetchComponent = (props) => {
         );
     }
 
-    const editEmployee = (employee) => {
+    static editEmployee(employee, successCallback) {
         let body = JSON.stringify( employee );
         fetch(process.env.REACT_APP_EMPLOYEE_API, {
             method: "PUT",
@@ -42,15 +41,17 @@ export const FetchComponent = (props) => {
             body: body
         })
         .then(resp =>  { 
-            if (resp.ok)
+            if (resp.ok) {
                 alert("Employee edited successfully!");
+                successCallback();
+            }
         })
         .catch( error =>
             console.error(error)
         );
     }
 
-    const getEmployee = (employeeId, employee, setEmployee, setIsLoading) => {
+    static getEmployee (employeeId, employee, setEmployee, setIsLoading) {
         setIsLoading(true);
         fetch(process.env.REACT_APP_EMPLOYEE_API+`/${employeeId}`)
             .then(response => response.json())
@@ -66,15 +67,15 @@ export const FetchComponent = (props) => {
             });
     }
 
-    const removeEmployee = (employeeId, isLoading) => {
-        isLoading(true);
+    static removeEmployee (employeeId, callback) {
         fetch(process.env.REACT_APP_EMPLOYEE_API+`/${employeeId}`, {
             method: 'DELETE'
           })
         .then(response => response)
-        .then(data => isLoading(false))
+        .then(data =>  { 
+            callback(); 
+        })
         .catch(error => {
-            isLoading(false);
             console.log(error);
         });
     }

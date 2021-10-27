@@ -4,7 +4,7 @@ import classes from './MyInput.module.css';
 export const MyInput = ({type, validationRegex, setValue, ...props}) => {
     const [isValid, setIsValid] = useState(false);
 
-    useEffect(() => validateInput(props.value), [])
+    useEffect(() => validateInput(props.value), [props.value])
 
     const validateInput = val => {
         if (val === undefined)

@@ -5,6 +5,7 @@ import { EmployeeForm } from './EmployeeForm';
 import { useEmployeeStatus } from './hooks/useEmployeeStatus';
 import { EmployeeContext } from "./hooks/EmployeeContext";
 import classes from './UI/button/MyButton.module.css';
+import { FetchComponent } from "./DataFetcher";
 
 export const AddEmployee = ({props}) =>  {
     const [employee, setEmployee] = useState({});
@@ -14,22 +15,7 @@ export const AddEmployee = ({props}) =>  {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        let body = JSON.stringify( employee );
-        fetch(process.env.REACT_APP_EMPLOYEE_API, {
-            method: "POST",
-            headers:{
-                'Content-Type':'application/json; charset=utf-8'
-            },
-            body: body
-        })
-        .then(resp =>  { 
-            if (resp.ok)
-                alert("Employee added successfully!");
-        })
-        .catch( error =>
-            console.error(error)
-        );
-        window.location.href = '/';
+        FetchComponent.addEmployee(employee, () => { window.location.href = '/' });
     }
 
     return (
