@@ -4,14 +4,53 @@ import { MyButton } from './UI/button/MyButton.jsx';
 import { AppConfig } from './AppConfig.js';
 import classes from './UI/button/MyButton.module.css';
 import { FetchComponent } from '../Utils/DataFetcher.js';
+import { MySelect } from './UI/select/MySelect.js';
 
 
 export const Employees = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [employees, setEmployees] = useState([]);
+  const [orderedEmployees, setOrderedEmployees] = useState([]);
+
+  function sortEmployees(order, data = employees) {
+    let comparer = undefined;
+    let sort = 0;
+    if (order.orderBy === 'ascending')
+      sort = 1;
+    if (order.orderBy === 'descending')
+      sort = -1;
+    switch(order.propName) {
+      case '':
+        comparer = (val1, val2) =>  0;
+        break;
+      case 'salary':
+        comparer = numberComparer;
+        break;
+      case 'birthday':
+        comparer = dateComparer;
+        break;
+      default:
+        comparer = stringComparer;
+        break;
+    }
+    setOrderedEmployees([...data].sort((empA, empB) => 
+      (sort)*comparer(empA[order.propName], empB[order.propName])));
+  }
+
+  function stringComparer(val1, val2) { 
+    return ('' + val1).localeCompare(val2);
+  }
+  
+  function dateComparer(val1, val2) { 
+    return (new Date(val1) - new Date(val2));
+  }
+
+  function numberComparer(val1, val2) { 
+    return val1 - val2;
+  }
 
   function refreshList() {
-    FetchComponent.getEmployees(setEmployees, setIsLoading);
+    FetchComponent.getEmployees(setEmployees, setIsLoading, sortEmployees);
   }
 
   function deleteEmployee(employeeId) {
@@ -32,17 +71,15 @@ export const Employees = (props) => {
         :<Table className="mt-4" striped bordered hover size="sm">
           <thead>
             <tr>
-              <th>Id</th>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Birth date</th>
-              <th>Salary</th>
+              <th>Name <MySelect onChange={sortEmployees} propName='name'/></th>
+              <th>Email <MySelect onChange={sortEmployees} propName='email'/></th>
+              <th>Birth date <MySelect onChange={sortEmployees} propName='birthday'/></th>
+              <th>Salary <MySelect onChange={sortEmployees} propName='salary'/></th>
             </tr>
           </thead>
           <tbody>
-          {employees?.map(emp => {
+          {orderedEmployees?.map(emp => {
               return <tr key={emp.id}>
-                <td>{emp.id}</td>
                 <td>{emp.name}</td>
                 <td>{emp.email}</td>
                 <td>{ new Date(emp.birthday).toLocaleDateString() }

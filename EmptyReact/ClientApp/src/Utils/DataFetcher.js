@@ -11,7 +11,8 @@ export class FetchComponent {
     }
 
     static hasToken() {
-        return sessionStorage.getItem(this.token) != 'undefined'
+        let token = sessionStorage.getItem(this.token);
+        return token != 'undefined' && token != undefined && token != null
     }
 
     static login(userData, setIsLoading, callback) {
@@ -41,7 +42,7 @@ export class FetchComponent {
         pathCallback();
     }
 
-    static getEmployees (setEmployees, setIsLoading) {
+    static getEmployees (setEmployees, setIsLoading, sortEmployees) {
         setIsLoading(true);
         fetch(process.env.REACT_APP_EMPLOYEE_API, {
             method: 'GET',
@@ -51,6 +52,7 @@ export class FetchComponent {
         .then(data => {
             setEmployees(data);
             setIsLoading(false);
+            sortEmployees({propName:'', orderBy: ''}, data);
         });
     };
 
