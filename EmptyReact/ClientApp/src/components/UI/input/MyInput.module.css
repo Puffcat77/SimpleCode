@@ -1,5 +1,19 @@
 .myInput {
-    width: 200px;
+    width: auto;
+    border-radius: 5px;
+    border: 1px black solid;
+}
+
+.myInputBlock {
+    display: block;
+}
+
+.myInput:focus {
+    border: 1px rgba(0, 150, 200, 0.99) solid;
+}
+
+.myInput:hover {
+    border: 1px rgba(0, 150, 200, 0.99) s;
 }
 
 .validation {
@@ -14,6 +28,7 @@
 
 .inputRules {
     margin: 0px;
+    width: auto;
     font-weight: bold;
     font-size: 14px;
     color: darkred;

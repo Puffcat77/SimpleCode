@@ -3,7 +3,7 @@ import {Table} from 'react-bootstrap';
 import { MyButton } from './UI/button/MyButton.jsx';
 import { AppConfig } from './AppConfig.js';
 import classes from './UI/button/MyButton.module.css';
-import { FetchComponent } from './DataFetcher.js';
+import { FetchComponent } from '../Utils/DataFetcher.js';
 
 
 export const Employees = (props) => {
@@ -13,8 +13,6 @@ export const Employees = (props) => {
   function refreshList() {
     FetchComponent.getEmployees(setEmployees, setIsLoading);
   }
-
-  useEffect(() => console.log(employees, isLoading));
 
   function deleteEmployee(employeeId) {
     FetchComponent.removeEmployee(employeeId, refreshList);

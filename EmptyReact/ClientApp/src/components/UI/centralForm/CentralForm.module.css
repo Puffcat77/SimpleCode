@@ -1,0 +1,23 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    width: max-content;
+    height: 50%;
+    margin: 0 auto;
+    min-width: 100px;
+    min-width: 100px;
+    border-radius: 5px;
+    justify-items: space-between;
+}
+
+.form > * {
+    margin-top: 10px;
+}
+
+.form:first-child {
+    margin-top: 0px;
+}
+
+.form > button:disabled {
+    display: none
+}

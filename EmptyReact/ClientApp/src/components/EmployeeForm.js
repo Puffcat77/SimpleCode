@@ -37,9 +37,9 @@ export const EmployeeForm = (props) => {
                             type="text"
                             name = "name"
                             placeholder="Name"
-                            validationRegex = {AppConfig.nameValidationRegex}
+                            validationRegex = { AppConfig.nameValidationRegex }
                             validRules = "Name should not be empty" 
-                            setValue = {setName}
+                            setValue = { setName }
                             value={ name }
                         />
                     </td>
@@ -52,10 +52,10 @@ export const EmployeeForm = (props) => {
                             type="email" 
                             name = "email"
                             placeholder="example@email.com"
-                            validationRegex = {AppConfig.emailValidationRegex}
+                            validationRegex = { AppConfig.emailValidationRegex }
                             validRules = "Enter email"
-                            setValue={setEmail}
-                            value={email}
+                            setValue={ setEmail }
+                            value={ email }
                         />
                     </td>
                 </tr>
@@ -67,7 +67,7 @@ export const EmployeeForm = (props) => {
                             type="date"
                             name = "birthday"
                             validRules = "Enter birthday"
-                            placeholder = {Date()}
+                            placeholder = { Date() }
                             setValue={ setBirthday } 
                             value={ birthday }
                             max={ maxBirthday() }
@@ -82,10 +82,10 @@ export const EmployeeForm = (props) => {
                             type="number" 
                             name = "salary"
                             placeholder="500.00" 
-                            validationRegex = {AppConfig.salaryValidationRegex}
+                            validationRegex = { AppConfig.salaryValidationRegex }
                             validRules = "Enter without spaces and commas"
-                            setValue={setSalary}
-                            value={salary}
+                            setValue={ setSalary }
+                            value={ salary }
                         />
                     </td>
                 </tr>

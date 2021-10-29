@@ -5,10 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using EmptyReact.Areas.RestApi.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EmptyReact.Areas.RestApi.Controllers
 {
     [Route("api/[controller]")]
+    [Authorize(Roles = "admin, user")]
     public class EmployeesController : Controller
     {
         private readonly EmployeeDbContext context;
@@ -46,8 +48,7 @@ namespace EmptyReact.Areas.RestApi.Controllers
                 }
                 return new StatusCodeResult(400);
             }
-            
-            emp.LastModifiedDate = DateTime.Now;
+            emp.LastModifiedDate = emp.LastModifiedDate.ToUniversalTime();
             context.Employees.Add(emp);
             await context.SaveChangesAsync();
             return new StatusCodeResult(200);
@@ -69,6 +70,7 @@ namespace EmptyReact.Areas.RestApi.Controllers
         {
             if (!ModelState.IsValid)
                 return new StatusCodeResult(400);
+            emp.LastModifiedDate = emp.LastModifiedDate.ToUniversalTime();
             context.Employees.Update(emp);
             await context.SaveChangesAsync();
             return new StatusCodeResult(200);

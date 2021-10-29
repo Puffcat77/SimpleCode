@@ -19,11 +19,12 @@ export const MyInput = ({type, validationRegex, setValue, ...props}) => {
     }
 
     return (
-        <div>
+        <div className={ classes.myInputBlock }>
             <input 
                 type = { type } 
                 className = { classes.myInput }
                 onChange = { e => validateInput(e.target.value) }
+                placeholder = { props.placeholder }
                 value = {props.value}
                 max = {props.max}
                 />

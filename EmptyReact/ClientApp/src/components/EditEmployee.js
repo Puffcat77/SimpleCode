@@ -5,10 +5,14 @@ import { EmployeeForm } from './EmployeeForm';
 import { useEmployeeStatus } from './hooks/useEmployeeStatus';
 import { EmployeeContext } from "./hooks/EmployeeContext";
 import classes from './UI/button/MyButton.module.css';
-import { FetchComponent } from "./DataFetcher";
+import { FetchComponent } from '../Utils/DataFetcher';
+import { useHistory, useLocation } from "react-router";
 
 export const EditEmployee = (props) => {
-    const [employee, setEmployee] = useState({id: props.match.params.id});
+    const location = useLocation();
+    console.log('location', location);
+    const lastSlashIndex = location.pathname.lastIndexOf('/');
+    const [employee, setEmployee] = useState({id: location.pathname.substr(lastSlashIndex + 1)});
     const isFilled = useEmployeeStatus(employee);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -32,7 +36,7 @@ export const EditEmployee = (props) => {
                 <h3>Loading...</h3>
                 :
                 <Form>
-                    <EmployeeForm id={props.match.params.id}/>
+                    <EmployeeForm id={employee.id}/>
                     <div className={ [classes.group].join(' ') }>
                         <MyButton 
                             disabled={!isFilled} 

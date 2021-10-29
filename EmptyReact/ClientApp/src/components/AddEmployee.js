@@ -5,7 +5,7 @@ import { EmployeeForm } from './EmployeeForm';
 import { useEmployeeStatus } from './hooks/useEmployeeStatus';
 import { EmployeeContext } from "./hooks/EmployeeContext";
 import classes from './UI/button/MyButton.module.css';
-import { FetchComponent } from "./DataFetcher";
+import { FetchComponent } from "../Utils/DataFetcher";
 
 export const AddEmployee = ({props}) =>  {
     const [employee, setEmployee] = useState({});

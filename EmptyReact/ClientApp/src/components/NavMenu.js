@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Collapse, Container, Navbar, NavbarBrand, NavbarToggler, NavItem, NavLink } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import './NavMenu.css';
+import { FetchComponent } from '../Utils/DataFetcher';
 
 export class NavMenu extends Component {
   static displayName = NavMenu.name;
@@ -11,13 +12,30 @@ export class NavMenu extends Component {
 
     this.toggleNavbar = this.toggleNavbar.bind(this);
     this.state = {
-      collapsed: true
+      collapsed: true,
+      hasToken: FetchComponent.hasToken()
     };
+  }
+
+  componentDidMount() {
+    this.setState({
+      collapsed: this.state.collapsed,
+      hasToken: FetchComponent.hasToken()
+    });
+  }
+
+  handleLogClick(e) {
+    e.preventDefault();
+    if (this.state.hasToken)
+      FetchComponent.logout(() => { window.location.href = '/' });
+    else
+      window.location.href = '/login';
   }
 
   toggleNavbar () {
     this.setState({
-      collapsed: !this.state.collapsed
+      collapsed: !this.state.collapsed,
+      hasToken: this.state.hasToken
     });
   }
 
@@ -34,10 +52,7 @@ export class NavMenu extends Component {
                   <NavLink tag={Link} className="text-dark" to="/">Employees</NavLink>
                 </NavItem>
                 <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/registration">Registration</NavLink>
-                </NavItem>
-                <NavItem>
-                  <NavLink tag={Link} className="text-dark" to="/login">Login</NavLink>
+                  <NavLink tag={Link} className="text-dark" to="/login" onClick={e => this.handleLogClick(e)}>{this.state.hasToken? 'Logout': 'Login'}</NavLink>
                 </NavItem>
               </ul>
             </Collapse>
