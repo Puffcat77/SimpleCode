@@ -5,12 +5,19 @@ import { AppConfig } from './AppConfig.js';
 import classes from './UI/button/MyButton.module.css';
 import { FetchComponent } from '../Utils/DataFetcher.js';
 import { MySelect } from './UI/select/MySelect.js';
+import { Loader } from './UI/Loader/Loader.jsx';
 
 
 export const Employees = (props) => {
   const [isLoading, setIsLoading] = useState(false);
   const [employees, setEmployees] = useState([]);
   const [orderedEmployees, setOrderedEmployees] = useState([]);
+
+  const stringComparer = (val1, val2) => ('' + val1).localeCompare('' + val2);
+  
+  const dateComparer = (val1, val2) => (new Date(val1) - new Date(val2));
+
+  const numberComparer = (val1, val2) => val1 - val2;
 
   function sortEmployees(order, data = employees) {
     let comparer = undefined;
@@ -37,18 +44,6 @@ export const Employees = (props) => {
       (sort)*comparer(empA[order.propName], empB[order.propName])));
   }
 
-  function stringComparer(val1, val2) { 
-    return ('' + val1).localeCompare(val2);
-  }
-  
-  function dateComparer(val1, val2) { 
-    return (new Date(val1) - new Date(val2));
-  }
-
-  function numberComparer(val1, val2) { 
-    return val1 - val2;
-  }
-
   function refreshList() {
     FetchComponent.getEmployees(setEmployees, setIsLoading, sortEmployees);
   }
@@ -67,7 +62,7 @@ export const Employees = (props) => {
       </h3>
       {
         isLoading?
-        <h4>Loading...</h4>
+        <div style={{display: 'flex', justifyContent: 'center'}}><Loader /></div>
         :<Table className="mt-4" striped bordered hover size="sm">
           <thead>
             <tr>

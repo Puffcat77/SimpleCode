@@ -3,6 +3,7 @@ import classes from './UI/centralForm/CentralForm.module.css';
 import { MyInput } from './UI/input/MyInput.jsx';
 import { MyButton } from './UI/button/MyButton.jsx';
 import { FetchComponent } from '../Utils/DataFetcher';
+import { Loader } from './UI/Loader/Loader';
 
 export const LoginForm = (props) => {
   const [login, setLogin] = useState('');
@@ -41,7 +42,7 @@ export const LoginForm = (props) => {
         placeholder='Confirm password'
       />
       {isLoading?
-      <h4>Loading...</h4>
+      <div style={{display: 'flex', justifyContent: 'center'}}><Loader /></div>
       :
       <MyButton
       customClasses={ classes.animated }
