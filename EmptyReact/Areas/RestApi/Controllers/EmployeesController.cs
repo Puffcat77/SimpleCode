@@ -30,9 +30,32 @@ namespace EmptyReact.Areas.RestApi.Controllers
         }
 
         [HttpGet]
-        public JsonResult GetAll()
+        public JsonResult GetAll(int limit,
+            int page, 
+            string orderProp,
+            string order)
         {
-            return new JsonResult(context.Employees.ToList());
+            Console.WriteLine(context.Employees.Count());
+            var orderedEmployees = OrderEmployees(orderProp, order);
+            var result = orderedEmployees.Skip(limit * (page - 1)).Take(limit).ToList();
+            return new JsonResult(new
+            {
+                employees = result,
+                pages = limit == 0 ? 0 
+                : (int)Math.Ceiling((double)context.Employees.Count() / limit)
+            });
+        }
+
+        private List<Employee> OrderEmployees(string prop, string order)
+        {
+            if (order == null || order == "")
+                return context.Employees.ToList();
+            if (order.Equals("asc"))
+                return context.Employees.OrderBy(employee => employee[prop]).ToList();
+            if (order.Equals("desc"))
+                return context.Employees.OrderByDescending(employee => employee[prop]).ToList();
+            return context.Employees.ToList();
+
         }
 
         [HttpPost]

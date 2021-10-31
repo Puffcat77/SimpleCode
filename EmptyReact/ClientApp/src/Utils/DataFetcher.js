@@ -1,3 +1,4 @@
+import { param } from 'jquery';
 import React from 'react';
 import { formDateString } from './DateTimeParser';
 
@@ -42,17 +43,29 @@ export class FetchComponent {
         pathCallback();
     }
 
-    static getEmployees (setEmployees, setIsLoading, sortEmployees) {
+    static getEmployees (setEmployees,
+            setIsLoading,
+            setPages, 
+            order, 
+            limit = 10, 
+            page = 1) {
         setIsLoading(true);
-        fetch(process.env.REACT_APP_EMPLOYEE_API, {
+        let params = new URLSearchParams({
+            limit: limit,
+            page: page,
+            orderProp: order.propName,
+            order: order.orderBy
+        });
+        fetch(process.env.REACT_APP_EMPLOYEE_API + `?${params.toString()}`, {
             method: 'GET',
             headers: this.requestHeaders
         })
         .then(response => response.json())
         .then(data => {
-            setEmployees(data);
+            console.log(data.pages)
+            setEmployees(data.employees);
+            setPages(data.pages);
             setIsLoading(false);
-            sortEmployees({propName:'', orderBy: ''}, data);
         });
     };
 
@@ -95,7 +108,7 @@ export class FetchComponent {
 
     static getEmployee (employeeId, employee, setEmployee, setIsLoading) {
         setIsLoading(true);
-        fetch(process.env.REACT_APP_EMPLOYEE_API+`/${employeeId}`, {
+        fetch(process.env.REACT_APP_EMPLOYEE_API+`${employeeId}`, {
             method: 'GET',
             headers: this.requestHeaders
         })
@@ -113,7 +126,7 @@ export class FetchComponent {
     }
 
     static removeEmployee (employeeId, callback) {
-        fetch(process.env.REACT_APP_EMPLOYEE_API+`/${employeeId}`, {
+        fetch(process.env.REACT_APP_EMPLOYEE_API+`${employeeId}`, {
             method: 'DELETE',
             headers: this.requestHeaders
           })

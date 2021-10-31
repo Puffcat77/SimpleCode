@@ -27,5 +27,25 @@ namespace EmptyReact.Areas.RestApi.Models
         
         [Required, DataType(DataType.Date)]
         public DateTime LastModifiedDate { get; set; }
+
+        public IComparable this [string propName]
+        {
+            get 
+            {
+                switch (propName) 
+                {
+                    case "Name":
+                        return Name;
+                    case "Email":
+                        return Email;
+                    case "Birthday":
+                        return Birthday;
+                    case "Salary":
+                        return Salary;
+                    default:
+                        return Id;
+                } 
+            }
+        }
     }
 }

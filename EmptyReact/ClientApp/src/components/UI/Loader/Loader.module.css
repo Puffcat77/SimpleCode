@@ -4,13 +4,20 @@
     border-radius: 50%;
     border: 1px dashed teal;
     animation: rotate 1s infinite linear;
+    }
+
+.inlineLoader {
+    display: inline-block;
+    margin-left: 10px;
+    width: 10px;
+    height: 10px;
 }
 
 @keyframes rotate {
     from {
-        transform: rotate(0deg) scale(0.7);
+        transform: rotate(0deg) scale(1);
     }
     to {
-        transform: rotate(360deg) scale(1.2);
+        transform: rotate(360deg) scale(2);
     }
 }
