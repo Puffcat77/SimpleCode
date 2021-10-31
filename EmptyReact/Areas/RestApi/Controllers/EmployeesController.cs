@@ -35,7 +35,6 @@ namespace EmptyReact.Areas.RestApi.Controllers
             string orderProp,
             string order)
         {
-            Console.WriteLine(context.Employees.Count());
             var orderedEmployees = OrderEmployees(orderProp, order);
             var result = orderedEmployees.Skip(limit * (page - 1)).Take(limit).ToList();
             return new JsonResult(new
