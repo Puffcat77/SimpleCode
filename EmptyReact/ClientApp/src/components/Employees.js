@@ -59,24 +59,18 @@ export const Employees = (props) => {
         <Table className={[ "mt-4" ]} striped bordered hover size="sm">
           <thead>
             <tr>
-              <th>Id</th>
               <th>Name <MySelect onChange={setOrder} propName='Name'/></th>
               <th>Email <MySelect onChange={setOrder} propName='Email'/></th>
               <th>Birth date <MySelect onChange={setOrder} propName='Birthday'/></th>
               <th>Salary <MySelect onChange={setOrder} propName='Salary'/></th>
             </tr>
           </thead>
-
+          <tbody>
           {isLoading?
-            <tbody>
-            </tbody>
-            :
-            <tbody>
-              {
-              employees?.map(emp => {
+              <tr></tr>
+              :employees?.map(emp => {
                 return (
                 <tr key={emp.id}>
-                  <td>{emp.id}</td>
                   <td>{emp.name}</td>
                   <td>{emp.email}</td>
                   <td>{ new Date(emp.birthday).toLocaleDateString() }
@@ -96,9 +90,9 @@ export const Employees = (props) => {
                   </td>
                 </tr>
                 )}
-              )}
-            </tbody>
-          }
+              )
+            }
+          </tbody>
         </Table>
         <Pages page={currentPage} setPage={setPage} pagesCount={ pagesCount }/>
     </div>
