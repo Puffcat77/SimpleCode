@@ -25,7 +25,7 @@ To run app - run ```npm start```
 
 ## Screenshots
 Login page
-![[login)page.png]]
+![[login_page.png]]
 
 Employees table page
 ![[employee_table.png]]
