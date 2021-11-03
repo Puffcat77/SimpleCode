@@ -5,27 +5,26 @@ export const MySelect = ({callback,
         value, 
         values, 
         defaultValue,
-        disabled, 
+        disabled,
+        defaultClasses,
         props}) => {
 
     return (
-        <div className={ classes.mySelectContainer }>
-            <select 
-            value = { value }
-            defaultValue={ defaultValue } 
-            className={ classes.mySelect } 
-            onChange={
-                event => {
-                    callback(event.target.value)
-                }
+        <select 
+        value = { value }
+        defaultValue={ defaultValue } 
+        className={ [classes.mySelect, defaultClasses].join(' ') } 
+        onChange={
+            event => {
+                callback(event.target.value)
             }
-            disabled={disabled}>
-            {values.map(opt => 
-                <option 
-                    value={opt.value} 
-                    label={opt.displayLabel} 
-                    key={opt.id}/>)}
-            </select>
-        </div>
+        }
+        disabled={disabled}>
+        {values.map(opt => 
+            <option 
+                value={opt.value} 
+                label={opt.displayLabel} 
+                key={opt.id}/>)}
+        </select>
     )
 }

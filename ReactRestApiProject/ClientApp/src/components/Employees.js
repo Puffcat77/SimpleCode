@@ -4,10 +4,10 @@ import { MyButton } from './UI/button/MyButton.jsx';
 import { AppConfig } from './AppConfig.js';
 import classes from './UI/button/MyButton.module.css';
 import { FetchComponent } from '../Utils/DataFetcher.js';
-import { MySelect } from './UI/select/MySelect.js';
 import { Loader } from './UI/Loader/Loader.jsx';
 import { Pages } from './Pages.js';
 import { MyOrder } from './UI/order/MyOrder.js';
+import { MyLimit } from './UI/limit/MyLimit.js';
 
 
 export const Employees = (props) => {
@@ -50,46 +50,47 @@ export const Employees = (props) => {
           value="Add employee" 
           onClick={e => { window.location.href='/add' }}/>
       </h3>
-      <MyOrder setOrder={setOrder} order={order}/>
-        <Table className={[ "mt-4" ]} striped bordered hover size="sm">
-          <thead>
-            <tr>
-              <th>Name</th>
-              <th>Email</th>
-              <th>Birth date</th>
-              <th>Salary</th>
-            </tr>
-          </thead>
-          <tbody>
-          {isLoading?
-              <tr></tr>
-              :employees?.map(emp => {
-                return (
-                <tr key={emp.id}>
-                  <td>{emp.name}</td>
-                  <td>{emp.email}</td>
-                  <td>{ new Date(emp.birthday).toLocaleDateString() }
-                  </td>
-                  <td>{ Intl.NumberFormat(AppConfig.userLanguage, { minimumFractionDigits: 2 }).format(emp.salary)}</td>
-                  <td>
-                    <div className={ classes.inlineGroup }>
-                      <MyButton 
-                        onClick ={ e => window.location.href = ("/employee/" + emp.id)} 
-                        customClasses={ classes.small } value='Edit'/>
-                      <div className={classes.splitter}/>
-                      <MyButton 
-                        onClick ={ e => deleteEmployee(emp.id)} 
-                        customClasses={ [classes.small, classes.red, classes.delete].join(' ') } 
-                        value='Delete'/>
-                    </div>
-                  </td>
-                </tr>
-                )}
-              )
-            }
-          </tbody>
-        </Table>
-        <Pages page={currentPage} setPage={setPage} pagesCount={ pagesCount }/>
+      <MyOrder setOrder={setOrder} order={order} isLoading={isLoading}/>
+      <MyLimit setLimit={setLimit} limit={limit} isLoading={isLoading}/>
+      <Table className={[ "mt-4" ]} striped bordered hover size="sm">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Birth date</th>
+            <th>Salary</th>
+          </tr>
+        </thead>
+        <tbody>
+        {isLoading?
+            <tr></tr>
+            :employees?.map(emp => {
+              return (
+              <tr key={emp.id}>
+                <td>{emp.name}</td>
+                <td>{emp.email}</td>
+                <td>{ new Date(emp.birthday).toLocaleDateString() }
+                </td>
+                <td>{ Intl.NumberFormat(AppConfig.userLanguage, { minimumFractionDigits: 2 }).format(emp.salary)}</td>
+                <td>
+                  <div className={ classes.inlineGroup }>
+                    <MyButton 
+                      onClick ={ e => window.location.href = ("/employee/" + emp.id)} 
+                      customClasses={ classes.small } value='Edit'/>
+                    <div className={classes.splitter}/>
+                    <MyButton 
+                      onClick ={ e => deleteEmployee(emp.id)} 
+                      customClasses={ [classes.small, classes.red, classes.delete].join(' ') } 
+                      value='Delete'/>
+                  </div>
+                </td>
+              </tr>
+              )}
+            )
+          }
+        </tbody>
+      </Table>
+      <Pages page={currentPage} setPage={setPage} pagesCount={ pagesCount }/>
     </div>
   );
 }
