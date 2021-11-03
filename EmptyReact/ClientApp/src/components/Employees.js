@@ -7,6 +7,7 @@ import { FetchComponent } from '../Utils/DataFetcher.js';
 import { MySelect } from './UI/select/MySelect.js';
 import { Loader } from './UI/Loader/Loader.jsx';
 import { Pages } from './Pages.js';
+import { MyOrder } from './UI/order/MyOrder.js';
 
 
 export const Employees = (props) => {
@@ -26,13 +27,6 @@ export const Employees = (props) => {
       limit, 
       currentPage);
   }
-
-  const emptyRows = useMemo(() => {
-    let res = [];
-    for (let i = employees.length; i < 10; i++)
-      res.push(i);
-    return res;
-  }, [employees])
 
   function deleteEmployee(employeeId) {
     FetchComponent.removeEmployee(employeeId, totalPages);
@@ -56,13 +50,14 @@ export const Employees = (props) => {
           value="Add employee" 
           onClick={e => { window.location.href='/add' }}/>
       </h3>
+      <MyOrder setOrder={setOrder} order={order}/>
         <Table className={[ "mt-4" ]} striped bordered hover size="sm">
           <thead>
             <tr>
-              <th>Name <MySelect onChange={setOrder} propName='Name'/></th>
-              <th>Email <MySelect onChange={setOrder} propName='Email'/></th>
-              <th>Birth date <MySelect onChange={setOrder} propName='Birthday'/></th>
-              <th>Salary <MySelect onChange={setOrder} propName='Salary'/></th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Birth date</th>
+              <th>Salary</th>
             </tr>
           </thead>
           <tbody>

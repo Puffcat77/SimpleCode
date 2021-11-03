@@ -9,11 +9,9 @@ export const Pages = ({pagesCount, page, setPage, props}) => {
         let firstPage = 1;
         let lastPage = pagesCount;
         for (let i = page - delta; i <= page + delta; i++) {
-            console.log(i)
             if (i > firstPage && i < pagesCount)
                 middlePages.push(i);
         }
-        console.log(middlePages)
         return {
             first: firstPage,
             middle: middlePages,

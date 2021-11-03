@@ -47,11 +47,11 @@ namespace EmptyReact.Areas.RestApi.Controllers
 
         private List<Employee> OrderEmployees(string prop, string order)
         {
-            if (order == null || order == "")
+            if (order == null || order == "" || prop == null || prop == "")
                 return context.Employees.ToList();
-            if (order.Equals("asc"))
+            if (order.Contains("asc"))
                 return context.Employees.OrderBy(employee => employee[prop]).ToList();
-            if (order.Equals("desc"))
+            if (order.Contains("desc"))
                 return context.Employees.OrderByDescending(employee => employee[prop]).ToList();
             return context.Employees.ToList();
 

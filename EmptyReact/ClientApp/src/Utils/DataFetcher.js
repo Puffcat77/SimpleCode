@@ -62,7 +62,6 @@ export class FetchComponent {
         })
         .then(response => response.json())
         .then(data => {
-            console.log(data.pages)
             setEmployees(data.employees);
             setPages(data.pages);
             setIsLoading(false);

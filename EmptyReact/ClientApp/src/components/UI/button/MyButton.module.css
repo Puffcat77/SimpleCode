@@ -9,19 +9,32 @@
     display: inline-block;
 }
 
+.myBtn:hover {
+    color: teal;
+    background-color: white;
+}
+
 .small {
     padding: 2px 3px;
     font-weight: normal;
-    height: 30px;
+    font-size: 14px;
+    margin: 0px;
 }
 
 .pageButton {
     background-color: white;
+    font-size: 10px;
     color: teal;
-    width: 35px;
-    height: 35px;
+    width: 30px;
+    height: 30px;
     font-weight: normal;
     margin: 5px;
+}
+
+.pageButton:hover {
+    background-color: lightcyan;
+    color: teal;
+    font-weight: bold;
 }
 
 .activePage {
@@ -46,15 +59,21 @@
     justify-content: space-between;
 }
 
-.inline-group {
+.inlineGroup {
     margin-top: 0px;
-    justify-self: center;
+    display: flex;
+    justify-content: center;
 }
 
 .red {
     color: white;
-    border: red;
+    border: 1px solid red;
     background: red;
+}
+
+.red:hover {
+    color: red;
+    background-color: white;
 }
 
 .splitter {
