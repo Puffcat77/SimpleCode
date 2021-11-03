@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31410.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EmptyReact", "EmptyReact\EmptyReact.csproj", "{457646A2-5E06-40AC-8BBF-F62BACEA365C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReactRestApiProject", "EmptyReact\ReactRestApiProject.csproj", "{457646A2-5E06-40AC-8BBF-F62BACEA365C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary", "ClassLibrary\ClassLibrary.csproj", "{C4E2EAC4-D164-453F-9243-0B658BB44B03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{457646A2-5E06-40AC-8BBF-F62BACEA365C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{457646A2-5E06-40AC-8BBF-F62BACEA365C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{457646A2-5E06-40AC-8BBF-F62BACEA365C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4E2EAC4-D164-453F-9243-0B658BB44B03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4E2EAC4-D164-453F-9243-0B658BB44B03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4E2EAC4-D164-453F-9243-0B658BB44B03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4E2EAC4-D164-453F-9243-0B658BB44B03}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,0 +1,112 @@
+{
+  "main": {
+    "id": "295b1e85dca485b5",
+    "type": "split",
+    "children": [
+      {
+        "id": "835ffc48a1a281af",
+        "type": "leaf",
+        "state": {
+          "type": "image",
+          "state": {
+            "file": "assets/login_page.png"
+          }
+        }
+      },
+      {
+        "id": "bf2931606f09a587",
+        "type": "leaf",
+        "state": {
+          "type": "markdown",
+          "state": {
+            "file": "Readme.md",
+            "mode": "preview"
+          }
+        }
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "5e0b4dfb1bcbaed2",
+    "type": "split",
+    "children": [
+      {
+        "id": "7e322ccb31796dd9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2c92f0a7fc0d3a7e",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {}
+            }
+          },
+          {
+            "id": "9f73dfa028ed50de",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "3380138f38d3fe9a",
+    "type": "split",
+    "children": [
+      {
+        "id": "8a16dcdca4bdd4e1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8f99cdbb00b7c9fc",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "assets/login_page.png",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "active": "835ffc48a1a281af",
+  "lastOpenFiles": [
+    "assets/login)page.png",
+    "assets/sorting table.png",
+    "assets/login page.png",
+    "Readme.md.md",
+    "assets/appsettings.json.png",
+    "assets/file .env.png",
+    "Pasted image 20211103042226.png",
+    "Pasted image 20211103042328.png",
+    "assets/Без названия.md",
+    "Без названия.md"
+  ]
+}
