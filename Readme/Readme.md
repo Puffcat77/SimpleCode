@@ -12,10 +12,10 @@ Fron-end made with:
 For correct work you must setup two files:
 -	appsettings.json (in project folder):
 
-![[appsettings.json.png]]
+![appsettings.json.png](assets/appsettings.json.png)
 -	.env file (in ClientApp folder):
 
-![[file_.env.png]]
+![file_.env.png](assets/file_.env.png)
 
 ## Installation
 To install required node modules - run ```npm install```
@@ -25,19 +25,19 @@ To run app - run ```npm start```
 
 ## Screenshots
 Login page
-![[login_page.png]]
+![login_page.png](assets/login_page.png)
 
 Employees table page
-![[employee_table.png]]
+![employee_table.png](assets/employee_table.png)
 
 Sorting table
-![[sorting_table.png]]
+![sorting_table.png](assets/sorting_table.png)
 
 Pagination
-![[pagination.png]]
+![pagination.png](assets/pagination.png)
 
 Adding new employee
-![[add_employee.png]]
+![add_employee.png](assets/add_employee.png)
 
 Editing employee
-![[edit_employee.png]]
+![edit_employee.png](assets/edit_employee.png)

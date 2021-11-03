@@ -7,9 +7,10 @@
         "id": "835ffc48a1a281af",
         "type": "leaf",
         "state": {
-          "type": "image",
+          "type": "markdown",
           "state": {
-            "file": "assets/login_page.png"
+            "file": "Readme.md",
+            "mode": "source"
           }
         }
       },
@@ -78,7 +79,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "assets/login_page.png",
+                "file": "Readme.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -98,6 +99,7 @@
   },
   "active": "835ffc48a1a281af",
   "lastOpenFiles": [
+    "Readme.md",
     "assets/login)page.png",
     "assets/sorting table.png",
     "assets/login page.png",
@@ -106,7 +108,6 @@
     "assets/file .env.png",
     "Pasted image 20211103042226.png",
     "Pasted image 20211103042328.png",
-    "assets/Без названия.md",
-    "Без названия.md"
+    "assets/Без названия.md"
   ]
 }
