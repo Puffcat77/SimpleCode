@@ -41,7 +41,6 @@ export const MyOrder = ({isLoading, setOrder, order, props}) => {
         in 
         <MySelect 
         callback={(val) => {
-            console.log(order, val)
             setOrder({
                 ...order,
                 orderBy: val
