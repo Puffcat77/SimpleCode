@@ -1,11 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ClassLibrary.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using ClassLibrary.Authorization;
 
 namespace ReactRestApiProject.Areas.Users.Controllers
 {
@@ -35,7 +35,7 @@ namespace ReactRestApiProject.Areas.Users.Controllers
                 claims: identity.Claims,
                 expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME_IN_MINUTES)),
                 signingCredentials: new SigningCredentials(
-                    AuthOptions.GetSymmetricSecurityKey(), 
+                    AuthOptions.GetSymmetricSecurityKey(),
                     SecurityAlgorithms.HmacSha256)
                 );
             var encodedJWT = new JwtSecurityTokenHandler().WriteToken(jwt);
@@ -54,7 +54,7 @@ namespace ReactRestApiProject.Areas.Users.Controllers
             User user = context.Users.FirstOrDefault(u => u.Login.Equals(login) && u.Password.Equals(password));
             if (user != null)
             {
-                var claims = new List<Claim> 
+                var claims = new List<Claim>
                 {
                     new Claim("user", user.Login),
                     new Claim("role", user.UserRole?.Name)

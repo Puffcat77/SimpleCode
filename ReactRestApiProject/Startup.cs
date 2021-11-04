@@ -30,14 +30,14 @@ namespace ReactRestApiProject
                  .AllowAnyHeader());
             });
 
-            services.AddDbContext<EmployeeDbContext>(options => 
+            services.AddDbContext<EmployeeDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("EmployeesDb")));
 
             services.AddDbContext<UserDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("UsersDb")));
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer(options => 
+                .AddJwtBearer(options =>
                 {
                     options.RequireHttpsMetadata = false;
                     options.TokenValidationParameters = new TokenValidationParameters

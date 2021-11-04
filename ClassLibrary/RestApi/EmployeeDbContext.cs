@@ -1,15 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ClassLibrary.RestApi
 {
-    public class EmployeeDbContext: DbContext
-    { 
+    public class EmployeeDbContext : DbContext
+    {
         public DbSet<Employee> Employees { get; set; }
-        public EmployeeDbContext(DbContextOptions<EmployeeDbContext> options): base(options)
+        public EmployeeDbContext(DbContextOptions<EmployeeDbContext> options) : base(options)
         {
             Database.EnsureCreated();
 
