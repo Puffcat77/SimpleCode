@@ -1,5 +1,10 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
+.env
+appsettings.json
+appsettings.Development.json
+
+
 # dependencies
 /node_modules
 

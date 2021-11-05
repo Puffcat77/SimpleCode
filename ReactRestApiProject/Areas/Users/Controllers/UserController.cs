@@ -52,6 +52,8 @@ namespace ReactRestApiProject.Areas.Users.Controllers
         private ClaimsIdentity GetIdentity(string login, string password)
         {
             User user = context.Users.FirstOrDefault(u => u.Login.Equals(login) && u.Password.Equals(password));
+            if (user.UserRole == null)
+                user.UserRole = context.Roles.FirstOrDefault(role => role.Id == user.UserRoleId);
             if (user != null)
             {
                 var claims = new List<Claim>

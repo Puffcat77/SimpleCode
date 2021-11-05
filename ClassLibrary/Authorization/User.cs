@@ -12,6 +12,7 @@ namespace ClassLibrary.Authorization
         [MaxLength(100)]
         public string Password { get; set; }
 
+        public int UserRoleId { get; set; }
         public Role UserRole { get; set; }
     }
 }

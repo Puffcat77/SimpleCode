@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ClassLibrary.Authorization
@@ -9,5 +10,7 @@ namespace ClassLibrary.Authorization
         public int Id { get; set; }
         [MaxLength(30)]
         public string Name { get; set; }
+
+        public List<User> Users { get; set; }
     }
 }

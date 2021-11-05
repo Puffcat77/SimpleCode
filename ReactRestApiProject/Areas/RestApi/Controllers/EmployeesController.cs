@@ -49,9 +49,9 @@ namespace ReactRestApiProject.Areas.RestApi.Controllers
         {
             if (order == null || order == "" || prop == null || prop == "")
                 return context.Employees.ToList();
-            if (order.Contains("asc"))
+            if (order.ToLower().Contains("asc"))
                 return context.Employees.OrderBy(employee => employee[prop]).ToList();
-            if (order.Contains("desc"))
+            if (order.ToLower().Contains("desc"))
                 return context.Employees.OrderByDescending(employee => employee[prop]).ToList();
             return context.Employees.ToList();
 

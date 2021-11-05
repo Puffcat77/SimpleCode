@@ -29,19 +29,19 @@ namespace ClassLibrary.RestApi
         {
             get
             {
-                switch (propName)
+                //using reflection
+                //foreach (var prop in GetType().GetProperties())
+                //    if (nameof(prop).ToLower().Equals(propName.ToLower()))
+                //        return (IComparable)prop.GetValue(this);
+                //return Id;
+                return propName switch
                 {
-                    case "Name":
-                        return Name;
-                    case "Email":
-                        return Email;
-                    case "Birthday":
-                        return Birthday;
-                    case "Salary":
-                        return Salary;
-                    default:
-                        return Id;
-                }
+                    "Name" => Name,
+                    "Email" => Email,
+                    "Birthday" => Birthday,
+                    "Salary" => Salary,
+                    _ => Id,
+                };
             }
         }
     }
