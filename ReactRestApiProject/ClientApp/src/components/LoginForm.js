@@ -3,7 +3,7 @@ import classes from './UI/centralForm/CentralForm.module.css';
 import { MyInput } from './UI/input/MyInput.jsx';
 import { MyButton } from './UI/button/MyButton.jsx';
 import { FetchComponent } from '../Utils/DataFetcher';
-import { Loader } from './UI/Loader/Loader';
+import { Loader } from './UI/loader/Loader';
 
 export const LoginForm = (props) => {
   const [login, setLogin] = useState('');

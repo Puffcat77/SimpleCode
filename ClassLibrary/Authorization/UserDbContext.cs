@@ -10,6 +10,7 @@ namespace ClassLibrary.Authorization
         public UserDbContext(DbContextOptions<UserDbContext> options) : base(options)
         {
             Database.EnsureCreated();
+
             //var adminRole = new Role { Name = "admin" };
             //if (Roles.FirstOrDefault(r => r.Name.Equals("admin")) == null)
             //    Roles.Add(adminRole);
