@@ -47,7 +47,7 @@ namespace ReactRestApiProject.Areas.RestApi.Controllers
 
         private List<Employee> OrderEmployees(string prop, string order)
         {
-            if (order == null || order == "" || prop == null || prop == "")
+            if (string.IsNullOrWhiteSpace(order) || string.IsNullOrWhiteSpace(prop))
                 return context.Employees.ToList();
             if (order.ToLower().Contains("asc"))
                 return context.Employees.OrderBy(employee => employee[prop]).ToList();
