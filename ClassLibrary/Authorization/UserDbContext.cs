@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace ClassLibrary.Authorization
+namespace ModelsLibrary.Authorization
 {
     public class UserDbContext : DbContext
     {
@@ -11,14 +11,14 @@ namespace ClassLibrary.Authorization
         {
             Database.EnsureCreated();
 
-            //var adminRole = new Role { Name = "admin" };
-            //if (Roles.FirstOrDefault(r => r.Name.Equals("admin")) == null)
-            //    Roles.Add(adminRole);
-            //if (Users.FirstOrDefault(u => u.Login.Equals("admin") && u.Password.Equals("admin")) == null)
-            //{
-            //    Users.Add(new User { Login = "admin", Password = "admin", UserRole = adminRole });
-            //}
-            //SaveChanges();
+            var adminRole = new Role { Name = "admin" };
+            if (Roles.FirstOrDefault(r => r.Name.Equals("admin")) == null)
+                Roles.Add(adminRole);
+            if (Users.FirstOrDefault(u => u.Login.Equals("admin") && u.Password.Equals("admin")) == null)
+            {
+                Users.Add(new User { Login = "admin", Password = "admin", UserRole = adminRole });
+            }
+            SaveChanges();
         }
     }
 }

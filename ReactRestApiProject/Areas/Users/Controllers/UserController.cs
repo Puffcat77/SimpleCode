@@ -1,6 +1,6 @@
-﻿using ClassLibrary.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using ModelsLibrary.Authorization;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -12,10 +12,10 @@ namespace ReactRestApiProject.Areas.Users.Controllers
     [Route("/login")]
     public class UserController : Controller
     {
-        private readonly UserDbContext context;
+        private readonly UserModel userModel;
         public UserController(UserDbContext context)
         {
-            this.context = context;
+            userModel = new UserModel(context);
         }
         [HttpPost]
         public IActionResult Login([FromBody] User user)
@@ -51,9 +51,7 @@ namespace ReactRestApiProject.Areas.Users.Controllers
 
         private ClaimsIdentity GetIdentity(string login, string password)
         {
-            User user = context.Users.FirstOrDefault(u => u.Login.Equals(login) && u.Password.Equals(password));
-            if (user.UserRole == null)
-                user.UserRole = context.Roles.FirstOrDefault(role => role.Id == user.UserRoleId);
+            User user = userModel.GetUser(login, password);
             if (user != null)
             {
                 var claims = new List<Claim>

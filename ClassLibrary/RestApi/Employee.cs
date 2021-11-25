@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ClassLibrary.RestApi
+namespace ModelsLibrary.RestApi
 {
     public class Employee
     {

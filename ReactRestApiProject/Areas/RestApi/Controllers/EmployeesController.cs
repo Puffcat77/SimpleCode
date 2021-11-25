@@ -1,7 +1,7 @@
-﻿using ClassLibrary.RestApi;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ModelsLibrary.RestApi;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,11 +37,13 @@ namespace ReactRestApiProject.Areas.RestApi.Controllers
         {
             var orderedEmployees = OrderEmployees(orderProp, order);
             var result = orderedEmployees.Skip(limit * (page - 1)).Take(limit).ToList();
+            double totalEmployeeCount = context.Employees.Count();
+            int totalPagesCount = limit == 0 ? 0
+                : (int)Math.Ceiling(totalEmployeeCount / limit);
             return new JsonResult(new
             {
                 employees = result,
-                pages = limit == 0 ? 0
-                : (int)Math.Ceiling((double)context.Employees.Count() / limit)
+                pages = totalPagesCount
             });
         }
 

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace ClassLibrary.RestApi
+namespace ModelsLibrary.RestApi
 {
     public class EmployeeDbContext : DbContext
     {

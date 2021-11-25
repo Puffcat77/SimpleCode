@@ -1,5 +1,3 @@
-using ClassLibrary.Authorization;
-using ClassLibrary.RestApi;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using ModelsLibrary.Authorization;
+using ModelsLibrary.RestApi;
 
 namespace ReactRestApiProject
 {
