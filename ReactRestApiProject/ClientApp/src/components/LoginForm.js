@@ -8,11 +8,10 @@ import { Loader } from './UI/loader/Loader';
 export const LoginForm = (props) => {
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
-  const [confPassword, setConfPassword] = useState('');
   const [isFilled, setIsFilled] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   
-  useEffect(() => setIsFilled(login !== '' && password !== '' && confPassword === password));
+  useEffect(() => setIsFilled(login !== '' && password !== ''));
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -34,12 +33,6 @@ export const LoginForm = (props) => {
         validationRegex='\w+'
         setValue={ setPassword }
         placeholder='Password'
-      />
-      <MyInput 
-        type="password"
-        validationRegex='\w+'
-        setValue={ setConfPassword }
-        placeholder='Confirm password'
       />
       {isLoading?
       <div style={{display: 'flex', justifyContent: 'center'}}><Loader /></div>

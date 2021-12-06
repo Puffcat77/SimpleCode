@@ -13,17 +13,17 @@ namespace ReactRestApiProject.Areas.RestApi.Controllers
     [Authorize(Roles = "admin, user")]
     public class EmployeesController : Controller
     {
-        private readonly EmployeeDbContext context;
+        private readonly EmployeesModel employeesModel;
 
         public EmployeesController(EmployeeDbContext context)
         {
-            this.context = context;
+            employeesModel = new EmployeesModel(context);
         }
 
         [HttpGet("{id}")]
-        public async Task<JsonResult> Get(int id)
+        public JsonResult Get(int id)
         {
-            var employee = await context.Employees.FirstOrDefaultAsync(e => e.Id == id);
+            var employee = employeesModel.Employees.FirstOrDefault(e => e.Id == id);
             if (employee == null)
                 return new JsonResult("Not found");
             return new JsonResult(employee);
@@ -35,68 +35,42 @@ namespace ReactRestApiProject.Areas.RestApi.Controllers
             string orderProp,
             string order)
         {
-            var orderedEmployees = OrderEmployees(orderProp, order);
-            var result = orderedEmployees.Skip(limit * (page - 1)).Take(limit).ToList();
-            double totalEmployeeCount = context.Employees.Count();
-            int totalPagesCount = limit == 0 ? 0
-                : (int)Math.Ceiling(totalEmployeeCount / limit);
+            var employees = employeesModel.GetOrderedEmployees(limit, page, orderProp, order);
+            
             return new JsonResult(new
             {
-                employees = result,
-                pages = totalPagesCount
+                employees,
+                pages = employeesModel.CountTotalEmployeesPages(limit)
             });
         }
 
-        private List<Employee> OrderEmployees(string prop, string order)
-        {
-            if (string.IsNullOrWhiteSpace(order) || string.IsNullOrWhiteSpace(prop))
-                return context.Employees.ToList();
-            if (order.ToLower().Contains("asc"))
-                return context.Employees.OrderBy(employee => employee[prop]).ToList();
-            if (order.ToLower().Contains("desc"))
-                return context.Employees.OrderByDescending(employee => employee[prop]).ToList();
-            return context.Employees.ToList();
-
-        }
-
         [HttpPost]
-        public async Task<IActionResult> Add([FromBody] Employee emp)
+        public IActionResult Add([FromBody] Employee emp)
         {
             if (!ModelState.IsValid)
-            {
-                var allErrors = ModelState.Values.SelectMany(v => v.Errors);
-                foreach (var error in allErrors)
-                {
-                    Console.WriteLine(error.ErrorMessage);
-                    Console.WriteLine(error.Exception);
-                }
                 return new StatusCodeResult(400);
-            }
             emp.LastModifiedDate = emp.LastModifiedDate.ToUniversalTime();
-            context.Employees.Add(emp);
-            await context.SaveChangesAsync();
+            employeesModel.AddEmployee(emp);
             return new StatusCodeResult(200);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Remove(int id)
         {
-            var emp = context.Employees.FirstOrDefault(e => e.Id == id);
+            var emp = employeesModel.Employees.FirstOrDefault(e => e.Id == id);
             if (emp == null)
                 return new StatusCodeResult(400);
-            context.Employees.Remove(emp);
-            context.SaveChanges();
+            employeesModel.RemoveEmployee(emp);
             return new StatusCodeResult(200);
         }
 
         [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] Employee emp)
+        public IActionResult Edit([FromBody] Employee emp)
         {
             if (!ModelState.IsValid)
                 return new StatusCodeResult(400);
             emp.LastModifiedDate = emp.LastModifiedDate.ToUniversalTime();
-            context.Employees.Update(emp);
-            await context.SaveChangesAsync();
+            employeesModel.UpdateEmployee(emp);
             return new StatusCodeResult(200);
         }
     }
