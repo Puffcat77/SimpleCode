@@ -6,7 +6,7 @@ import { useEmployeeStatus } from './hooks/useEmployeeStatus';
 import { EmployeeContext } from "./hooks/EmployeeContext";
 import classes from './UI/button/MyButton.module.css';
 import { FetchComponent } from '../Utils/DataFetcher';
-import { useHistory, useLocation } from "react-router";
+import { useLocation } from "react-router";
 
 export const EditEmployee = (props) => {
     const location = useLocation();

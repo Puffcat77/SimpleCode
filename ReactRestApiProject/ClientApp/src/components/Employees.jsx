@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import { MyButton } from './UI/button/MyButton.jsx';
 import { FetchComponent } from '../Utils/DataFetcher.js';
 import { Loader } from './UI/loader/Loader.jsx';
-import { Pages } from './Pages.js';
-import { MyOrder } from './UI/order/MyOrder.js';
-import { MyLimit } from './UI/limit/MyLimit.js';
-import { MyTable } from './UI/table/MyTable.js';
+import { Pages } from './Pages.jsx';
+import { MyOrder } from './UI/order/MyOrder.jsx';
+import { MyLimit } from './UI/limit/MyLimit.jsx';
+import { MyTable } from './UI/table/MyTable.jsx';
 
 
 export const Employees = (props) => {

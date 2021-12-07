@@ -1,5 +1,3 @@
-using ClassLibrary.Authorization;
-using ClassLibrary.RestApi;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,6 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
+using ModelsLibrary.Authorization;
+using ModelsLibrary.RestApi;
 
 namespace ReactRestApiProject
 {
@@ -89,14 +89,6 @@ namespace ReactRestApiProject
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                //endpoints.MapAreaControllerRoute(
-                //    name: "employee",
-                //    areaName: "employee",
-                //    pattern: "api/{controller=Employee}/{action=GetAll}");
-
-                //endpoints.MapControllerRoute(
-                //    name: "default",
-                //    pattern: "{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>

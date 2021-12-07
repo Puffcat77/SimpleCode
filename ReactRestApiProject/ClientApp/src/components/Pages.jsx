@@ -20,8 +20,9 @@ export const Pages = ({pagesCount, page, setPage, props}) => {
     }, [pagesCount, page]);
 
     const separator = (borderPage) => {
-        return pages.middle[0] == borderPage + 1 
-        || pages.middle[pages.middle.length - 1] == borderPage - 1 
+        return pages.middle[0] === borderPage + 1 
+        || pages.middle[pages.middle.length - 1] === borderPage - 1 
+        || pagesCount < 3
         ? <div></div>: <div style={{display:'flex', alignItems:'center'}}>...</div>
     }
 
@@ -33,9 +34,10 @@ export const Pages = ({pagesCount, page, setPage, props}) => {
             <MyButton 
                     key={'first'} 
                     value={pages.first} 
-                    customClasses={ [
+                    customClasses={ 
+                        [
                             buttonClasses.pageButton, 
-                            pages.first == page ? buttonClasses.activePage: ''
+                            pages.first === page ? buttonClasses.activePage: ''
                         ].join(' ')}
                     onClick={()=> setPage(pages.first)}/>
             { separator(pages.first)}
@@ -46,20 +48,23 @@ export const Pages = ({pagesCount, page, setPage, props}) => {
                     value={p} 
                     customClasses={ [
                             buttonClasses.pageButton, 
-                            p == page ? buttonClasses.activePage: ''
+                            p === page ? buttonClasses.activePage: ''
                         ].join(' ')}
                     onClick={()=> setPage(p)}
                 />) 
             }
             {separator(pages.last)}
-            <MyButton 
+            {
+                pagesCount === 1?
+                <div/>
+                :<MyButton 
                     key={'last'} 
                     value={pages.last} 
                     customClasses={ [
                             buttonClasses.pageButton, 
-                            pages.last == page ? buttonClasses.activePage: ''
+                            pages.last === page ? buttonClasses.activePage: ''
                         ].join(' ')}
-                    onClick={()=> setPage(pages.last)}/>
+                    onClick={()=> setPage(pages.last)}/>}
         </div>
     );
 }

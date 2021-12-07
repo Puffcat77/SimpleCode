@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System;
+using System.Linq;
 
-namespace ClassLibrary.RestApi
+namespace ModelsLibrary.RestApi
 {
     public class EmployeeDbContext : DbContext
     {
@@ -9,18 +11,18 @@ namespace ClassLibrary.RestApi
         {
             Database.EnsureCreated();
 
-            //if (Employees.Count() < 60)
-            //    for (int i = Employees.Count(); i < 60; i++)
-            //    {
-            //        Employees.Add(new Employee
-            //        {
-            //            Name = "Name " + (i + 1),
-            //            Birthday = new DateTime(2000, 10, (i + 1) % 29 + 1),
-            //            Salary = 50000 - 500 * i,
-            //            Email = $"email{(i + 1)}@email.mail"
-            //        });
-            //    }
-            //SaveChanges();
+            if (Employees.Count() < 60)
+                for (int i = Employees.Count(); i < 60; i++)
+                {
+                    Employees.Add(new Employee
+                    {
+                        Name = "Name " + (i + 1),
+                        Birthday = new DateTime(2000, 10, (i + 1) % 29 + 1),
+                        Salary = 50000 - 500 * i,
+                        Email = $"email{(i + 1)}@email.mail"
+                    });
+                }
+            SaveChanges();
         }
     }
 }

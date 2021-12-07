@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace ClassLibrary.Authorization
+namespace ModelsLibrary.Authorization
 {
     public class Role
     {
