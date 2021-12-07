@@ -26,8 +26,10 @@ namespace ModelsLibrary.RestApi
             string orderProp,
             string order)
         {
-            var orderedEmployees = OrderEmployees(orderProp, order);
-            return orderedEmployees.Skip(limit * (page - 1)).Take(limit).ToList();
+            return OrderEmployees(orderProp, order)
+                .Skip(limit * (page - 1))
+                .Take(limit)
+                .ToList();
         }
 
         public int CountTotalEmployeesPages(int limit)
