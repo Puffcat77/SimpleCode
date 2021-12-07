@@ -22,6 +22,7 @@ export const Pages = ({pagesCount, page, setPage, props}) => {
     const separator = (borderPage) => {
         return pages.middle[0] == borderPage + 1 
         || pages.middle[pages.middle.length - 1] == borderPage - 1 
+        || pagesCount < 3
         ? <div></div>: <div style={{display:'flex', alignItems:'center'}}>...</div>
     }
 
@@ -52,14 +53,17 @@ export const Pages = ({pagesCount, page, setPage, props}) => {
                 />) 
             }
             {separator(pages.last)}
-            <MyButton 
+            {
+                pagesCount === 1?
+                <div/>
+                :<MyButton 
                     key={'last'} 
                     value={pages.last} 
                     customClasses={ [
                             buttonClasses.pageButton, 
                             pages.last == page ? buttonClasses.activePage: ''
                         ].join(' ')}
-                    onClick={()=> setPage(pages.last)}/>
+                    onClick={()=> setPage(pages.last)}/>}
         </div>
     );
 }

@@ -17,7 +17,7 @@ export const LoginForm = (props) => {
     e.preventDefault();
     FetchComponent.login({ "login" : login, "password" : password}
     , setIsLoading
-    , () => {window.location.href='/'});
+    , () => { window.location.href='/employees'});
   }
 
   return (

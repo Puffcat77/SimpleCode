@@ -35,7 +35,7 @@ namespace ModelsLibrary.RestApi
             if (limit == 0)
                 return 1;
             int totalEmployeesCount = context.Employees.Count();
-            int pagesCount = totalEmployeesCount / limit + 1;
+            int pagesCount = (int)Math.Ceiling((double)totalEmployeesCount / limit);
             return pagesCount;
         }
 
