@@ -33,6 +33,7 @@ export class FetchComponent {
             callback();
         })
         .catch(error =>  {
+            alert('Something\'s wrong! Check console for details')
             console.log(error)
             setIsLoading(false);
         });
@@ -81,9 +82,10 @@ export class FetchComponent {
                 successCallback();
             }
         })
-        .catch( error =>
-            console.error(error)
-        );
+        .catch(error => {
+            alert('Something\'s wrong! Check console for details')
+            console.log(error)
+        });
     }
 
     static editEmployee(employee, successCallback) {
@@ -100,12 +102,13 @@ export class FetchComponent {
                 successCallback();
             }
         })
-        .catch( error =>
-            console.error(error)
-        );
+        .catch(error => {
+            alert('Something\'s wrong! Check console for details')
+            console.log(error)
+        });
     }
 
-    static getEmployee (employeeId, employee, setEmployee, setIsLoading) {
+    static getEmployee(employeeId, employee, setEmployee, setIsLoading) {
         setIsLoading(true);
         fetch(process.env.REACT_APP_EMPLOYEE_API+`${employeeId}`, {
             method: 'GET',
@@ -121,10 +124,14 @@ export class FetchComponent {
                     salary: data.salary?.toString()
                 });
                 setIsLoading(false);
+            })
+            .catch(error => {
+                alert('Something\'s wrong! Check console for details')
+                console.log(error)
             });
     }
 
-    static removeEmployee (employeeId, callback) {
+    static removeEmployee(employeeId, callback) {
         fetch(process.env.REACT_APP_EMPLOYEE_API+`${employeeId}`, {
             method: 'DELETE',
             headers: this.requestHeaders
@@ -134,6 +141,7 @@ export class FetchComponent {
             callback(); 
         })
         .catch(error => {
+            alert('Something\'s wrong! Check console for details')
             console.log(error);
         });
     }
