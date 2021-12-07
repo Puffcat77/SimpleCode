@@ -1,5 +1,3 @@
-import { param } from 'jquery';
-import React from 'react';
 import { formDateString } from './DateTimeParser';
 
 export class FetchComponent {
@@ -13,7 +11,7 @@ export class FetchComponent {
 
     static hasToken() {
         let token = sessionStorage.getItem(this.token);
-        return token != 'undefined' && token != undefined && token != null
+        return token !== 'undefined' && token !== undefined && token !== null
     }
 
     static login(userData, setIsLoading, callback) {

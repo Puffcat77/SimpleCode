@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
-import { Employees } from './Employees';
-import { LoginForm } from './LoginForm';
-import { EditEmployee } from './EditEmployee';
-import { AddEmployee } from './AddEmployee';
+import { Employees } from './Employees.jsx';
+import { LoginForm } from './LoginForm.jsx';
+import { EditEmployee } from './EditEmployee.jsx';
+import { AddEmployee } from './AddEmployee.jsx';
 import { FetchComponent } from '../Utils/DataFetcher';
 
 export const AppRouter= () => {

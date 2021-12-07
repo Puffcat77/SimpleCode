@@ -15,8 +15,13 @@ export const AddEmployee = ({props}) =>  {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        FetchComponent.addEmployee(employee, () => { window.location.href = '/' });
+        FetchComponent.addEmployee(employee, () => { window.location.href = '/employees' });
     }
+
+    const cancelSubmit = (e) => {
+        e.preventDefault();
+        window.location.href = '/employees';
+    };
 
     return (
         <EmployeeContext.Provider value={{employee, setEmployee}}>
@@ -27,6 +32,10 @@ export const AddEmployee = ({props}) =>  {
                         disabled={!isFilled} 
                         value="Add new employee" 
                         onClick={e => handleSubmit(e)}/>
+                    <MyButton customClasses = { classes.red }
+                        disabled={false} 
+                        value="Cancel"
+                        onClick={e => cancelSubmit(e)}/>
             </Form>
         </EmployeeContext.Provider>
     )

@@ -89,14 +89,6 @@ namespace ReactRestApiProject
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                //endpoints.MapAreaControllerRoute(
-                //    name: "employee",
-                //    areaName: "employee",
-                //    pattern: "api/{controller=Employee}/{action=GetAll}");
-
-                //endpoints.MapControllerRoute(
-                //    name: "default",
-                //    pattern: "{controller}/{action=Index}/{id?}");
             });
 
             app.UseSpa(spa =>

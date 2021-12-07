@@ -1,5 +1,5 @@
 import React from 'react';
-import { MySelect } from '../select/MySelect';
+import { MySelect } from '../select/MySelect.jsx';
 import selectClasses from '../select/MySelect.module.css'
 
 export const MyOrder = ({isLoading, setOrder, order, props}) => {
@@ -50,7 +50,7 @@ export const MyOrder = ({isLoading, setOrder, order, props}) => {
             defaultClasses={selectClasses.mySelectContainer}
             values={[defaultValue, ...orderOptions]}
             defaultValue={'-'}
-            disabled={order.propName == '' || isLoading }
+            disabled={order.propName === '' || isLoading }
             value={order?.orderBy}/>
         order
         </div>
