@@ -6,7 +6,7 @@ using System.Text;
 
 namespace ModelsLibrary.Authorization
 {
-    public class UserModel
+    public class UserService
     {
         private UserDbContext context;
         private List<User> Users 
@@ -16,7 +16,7 @@ namespace ModelsLibrary.Authorization
                 return context.Users.Include(u => u.UserRole).ToListAsync().Result;
             }
         }
-        public UserModel(UserDbContext context)
+        public UserService(UserDbContext context)
         {
             this.context = context;
         }

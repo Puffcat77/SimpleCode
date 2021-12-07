@@ -12,10 +12,10 @@ namespace ReactRestApiProject.Areas.Users.Controllers
     [Route("/login")]
     public class UserController : Controller
     {
-        private readonly UserModel userModel;
+        private readonly UserService userModel;
         public UserController(UserDbContext context)
         {
-            userModel = new UserModel(context);
+            userModel = new UserService(context);
         }
         [HttpPost]
         public IActionResult Login([FromBody] User user)

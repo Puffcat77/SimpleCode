@@ -13,34 +13,32 @@ namespace ReactRestApiProject.Areas.RestApi.Controllers
     [Authorize(Roles = "admin, user")]
     public class EmployeesController : Controller
     {
-        private readonly EmployeesModel employeesModel;
+        private readonly EmployeesService employeesService;
 
         public EmployeesController(EmployeeDbContext context)
         {
-            employeesModel = new EmployeesModel(context);
+            employeesService = new EmployeesService(context);
         }
 
         [HttpGet("{id}")]
-        public JsonResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var employee = employeesModel.Employees.FirstOrDefault(e => e.Id == id);
+            var employee = await employeesService.GetEmployee(id);
             if (employee == null)
-                return new JsonResult("Not found");
+                return new StatusCodeResult(404);
             return new JsonResult(employee);
         }
 
         [HttpGet]
-        public JsonResult GetAll(int limit,
+        public async Task<IActionResult> GetAll(int limit,
             int page,
             string orderProp,
             string order)
         {
-            var employees = employeesModel.GetOrderedEmployees(limit, page, orderProp, order);
-            
             return new JsonResult(new
             {
-                employees,
-                pages = employeesModel.CountTotalEmployeesPages(limit)
+                employees = employeesService.GetOrderedEmployees(limit, page, orderProp, order),
+                pages = await employeesService.CountTotalEmployeesPages(limit)
             });
         }
 
@@ -50,17 +48,17 @@ namespace ReactRestApiProject.Areas.RestApi.Controllers
             if (!ModelState.IsValid)
                 return new StatusCodeResult(400);
             emp.LastModifiedDate = emp.LastModifiedDate.ToUniversalTime();
-            employeesModel.AddEmployee(emp);
+            employeesService.AddEmployee(emp);
             return new StatusCodeResult(200);
         }
 
         [HttpDelete("{id}")]
         public IActionResult Remove(int id)
         {
-            var emp = employeesModel.Employees.FirstOrDefault(e => e.Id == id);
+            var emp = employeesService.Employees.FirstOrDefault(e => e.Id == id);
             if (emp == null)
                 return new StatusCodeResult(400);
-            employeesModel.RemoveEmployee(emp);
+            employeesService.RemoveEmployee(emp);
             return new StatusCodeResult(200);
         }
 
@@ -70,7 +68,7 @@ namespace ReactRestApiProject.Areas.RestApi.Controllers
             if (!ModelState.IsValid)
                 return new StatusCodeResult(400);
             emp.LastModifiedDate = emp.LastModifiedDate.ToUniversalTime();
-            employeesModel.UpdateEmployee(emp);
+            employeesService.UpdateEmployee(emp);
             return new StatusCodeResult(200);
         }
     }

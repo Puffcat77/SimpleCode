@@ -1,11 +1,13 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace ModelsLibrary.RestApi
 {
-    public class EmployeesModel
+    public class EmployeesService
     {
         private EmployeeDbContext context;
         public List<Employee> Employees
@@ -16,9 +18,14 @@ namespace ModelsLibrary.RestApi
             }
         }
 
-        public EmployeesModel(EmployeeDbContext context)
+        public EmployeesService(EmployeeDbContext context)
         {
             this.context = context;
+        }
+
+        public async Task<Employee> GetEmployee(int id)
+        {
+            return await context.Employees.FirstOrDefaultAsync(empl => empl.Id == id);
         }
 
         public List<Employee> GetOrderedEmployees(int limit,
@@ -32,11 +39,11 @@ namespace ModelsLibrary.RestApi
                 .ToList();
         }
 
-        public int CountTotalEmployeesPages(int limit)
+        public async Task<int> CountTotalEmployeesPages(int limit)
         {
             if (limit == 0)
                 return 1;
-            int totalEmployeesCount = context.Employees.Count();
+            int totalEmployeesCount = await context.Employees.CountAsync();
             int pagesCount = (int)Math.Ceiling((double)totalEmployeesCount / limit);
             return pagesCount;
         }
@@ -52,22 +59,22 @@ namespace ModelsLibrary.RestApi
             return context.Employees;
         }
 
-        public void AddEmployee(Employee emp)
+        public async void AddEmployee(Employee emp)
         {
-            context.Employees.Add(emp);
-            context.SaveChanges();
+            await context.Employees.AddAsync(emp);
+            await context.SaveChangesAsync();
         }
 
-        public void RemoveEmployee(Employee emp)
+        public async void RemoveEmployee(Employee emp)
         {
             context.Employees.Remove(emp);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
 
-        public void UpdateEmployee(Employee emp)
+        public async void UpdateEmployee(Employee emp)
         {
             context.Employees.Update(emp);
-            context.SaveChanges();
+            await context.SaveChangesAsync();
         }
     }
 }
