@@ -35,7 +35,6 @@ export const MyOrder = ({isLoading, setOrder, order, props}) => {
                 })
         }} 
         values={[defaultValue, ...propNames]}
-        defaultValue={'-'}
         disabled={isLoading}
         value={order?.propName}
         defaultClasses={selectClasses.mySelectContainer}

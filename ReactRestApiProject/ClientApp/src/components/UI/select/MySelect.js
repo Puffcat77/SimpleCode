@@ -4,7 +4,6 @@ import classes from './MySelect.module.css'
 export const MySelect = ({callback,
         value, 
         values, 
-        defaultValue,
         disabled,
         defaultClasses,
         props}) => {
@@ -12,7 +11,6 @@ export const MySelect = ({callback,
     return (
         <select 
         value = { value }
-        defaultValue={ defaultValue } 
         className={ [classes.mySelect, defaultClasses].join(' ') } 
         onChange={
             event => {
